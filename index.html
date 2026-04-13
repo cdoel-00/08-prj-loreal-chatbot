@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -19,15 +19,28 @@
     <div class="page-wrapper">
       <!------- Header / Branding ------->
       <header class="site-header">
+        <img src="img/loreal-logo.png" alt="L'Oreal logo" class="brand-logo" />
         <h1 class="site-title">Smart Product Advisor</h1>
+        <p class="site-subtitle">
+          Luxury beauty guidance, personalized in seconds.
+        </p>
       </header>
 
       <!------- Chat Area ------->
       <main>
         <section class="chatbox">
+          <p id="latestQuestion" class="latest-question">
+            Latest question: Ask something about L'Oreal to begin.
+          </p>
+
           <div id="chatWindow" class="chat-window">
             <!-- messages will be appended here via JS -->
           </div>
+
+          <p class="scope-note">
+            This assistant answers questions about L'Oreal products and company
+            topics.
+          </p>
 
           <form id="chatForm" class="chat-form">
             <label for="userInput" class="visually-hidden">Message</label>
