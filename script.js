@@ -7,6 +7,9 @@ const latestQuestion = document.getElementById("latestQuestion");
 const sendIcon = sendBtn.querySelector(".material-icons");
 const siteHeader = document.querySelector(".site-header");
 
+// Replace with your deployed Cloudflare Worker URL.
+const CLOUDFLARE_WORKER_URL = "https://chatbotworker.cdoel-84d.workers.dev/";
+
 let userName = "";
 const userQuestionHistory = [];
 
@@ -130,16 +133,17 @@ chatForm.addEventListener("submit", async (e) => {
       });
     }
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    if (CLOUDFLARE_WORKER_URL.includes("your-worker-name")) {
+      throw new Error("Set your Cloudflare Worker URL in script.js first.");
+    }
+
+    const response = await fetch(CLOUDFLARE_WORKER_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "gpt-4o",
         messages: requestMessages,
-        max_completion_tokens: 300,
       }),
     });
 
@@ -158,7 +162,7 @@ chatForm.addEventListener("submit", async (e) => {
   } catch (error) {
     addMessage(
       "assistant",
-      "I couldn't connect to OpenAI right now. Check your API key and try again.",
+      "I couldn't connect right now. Check your Cloudflare Worker URL and try again.",
     );
     console.error(error);
   } finally {
